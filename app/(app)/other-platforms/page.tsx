@@ -20,9 +20,6 @@ import {
   Calendar,
   MessageSquare,
   Briefcase,
-  GraduationCap,
-  Newspaper,
-  Video,
 } from "lucide-react";
 
 export default function OtherPlatforms() {
@@ -111,20 +108,11 @@ export default function OtherPlatforms() {
       <div className="border-b ">
         <div className="px-6 py-8">
           <div className="max-w-4xl">
-            <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
-              Other Platforms
-            </h1>
             <p className="mb-6 text-lg text-gray-600 dark:text-white">
               Explore Innovation Salone's ecosystem of platforms and services
               designed to support entrepreneurs, innovators, and the tech
               community in Sierra Leone.
             </p>
-
-            {/* Search */}
-            <div className="relative max-w-md">
-              <Search className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
-              <Input placeholder="Search platforms..." className="pl-10" />
-            </div>
           </div>
         </div>
       </div>
