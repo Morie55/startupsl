@@ -21,6 +21,7 @@ import {
   Users2,
   ShieldCheck,
   Share2,
+  User2,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -143,21 +144,25 @@ export default function ClientLayout({
                     </DropdownMenuItem>
                     <DropdownMenuItem className="mt-4 ">
                       <SignOutButton>
-                        <Button className=" text-xs">Logout</Button>
+                        <Button className="text-xs ">Logout</Button>
                       </SignOutButton>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Link href="/sign-in">
+                  <Link className="max-md:hidden" href="/sign-in">
                     <Button>Sign In</Button>
                   </Link>
 
-                  <Link href="/sign-up">
+                  <Link className="max-md:hidden" href="/sign-up">
                     <Button variant={"outline"} className="">
                       Sign Up
                     </Button>
+                  </Link>
+
+                  <Link className="md:hidden" href="/sign-in">
+                    <User2 />
                   </Link>
                 </div>
               )}

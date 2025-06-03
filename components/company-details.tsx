@@ -2235,7 +2235,7 @@ export default function CompanyDetailsPage({
           <TabsContent value="funding" className="space-y-8">
             <Card className="overflow-hidden shadow-md dark:border">
               <CardHeader className="border-b bg-accent ">
-                <div className="flex  justify-between w-full">
+                <div className="flex justify-between w-full">
                   <div>
                     <CardTitle className="text-xl">Funding Rounds</CardTitle>
                     <CardDescription>
@@ -2246,7 +2246,7 @@ export default function CompanyDetailsPage({
                   {user?.id === company?.userId && (
                     <Link href={"/rounds/new"}>
                       <Button>
-                        <Plus className="mr-2 h-4 w-4" />
+                        <Plus className="w-4 h-4 mr-2" />
                         Add Funding Round
                       </Button>
                     </Link>
