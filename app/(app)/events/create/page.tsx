@@ -80,30 +80,18 @@ export default function CreateEventPage() {
       <header className="px-6 py-4 bg-white border-b border-slate-200 dark:bg-slate-800">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <SidebarTrigger />
             <Link
               href="/events"
-              className="flex items-center gap-2 text-slate-600 hover:text-slate-900"
+              className="flex items-center gap-2 text-slate-600 hover:text-slate-900 dark:text-slate-200"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Events
             </Link>
           </div>
-
-          <div className="flex items-center gap-4">
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <SignInButton>
-                <Button>Sign In</Button>
-              </SignInButton>
-            </SignedOut>
-          </div>
         </div>
       </header>
 
-      <div className="max-w-4xl px-6 py-8 mx-auto">
+      <div className="p-6 ">
         <SignedOut>
           <Card className="p-8 text-center">
             <Calendar className="w-12 h-12 mx-auto mb-4 text-slate-400" />
@@ -121,10 +109,10 @@ export default function CreateEventPage() {
 
         <SignedIn>
           <div className="mb-8">
-            <h1 className="mb-2 text-3xl font-bold text-slate-900">
+            <h1 className="mb-2 text-3xl font-bold text-slate-900 dark:text-slate-200">
               Create New Event
             </h1>
-            <p className="text-slate-600">
+            <p className="text-slate-600 dark:text-slate-200">
               Share your event with the StartUp-SL community
             </p>
           </div>
