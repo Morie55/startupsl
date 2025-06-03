@@ -27,10 +27,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClientLayout notifications={notifications} unreadCount={unreadCount}>
-          <SidebarProvider>
-            {children}
-            <Toaster />
-          </SidebarProvider>
+          {children}
+          <Toaster />
         </ClientLayout>
       </body>
     </html>

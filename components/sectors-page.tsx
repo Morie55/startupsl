@@ -15,7 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function SectorsPage() {
   return (
-    <div className="flex flex-col gap-6 p-6 md:gap-8 md:p-8">
+    <div className="flex flex-col w-full gap-6 p-6 md:gap-8 md:p-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Sectors</h1>
@@ -25,11 +25,11 @@ export function SectorsPage() {
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm">
-            <Filter className="mr-2 h-4 w-4" />
+            <Filter className="w-4 h-4 mr-2" />
             Filter
           </Button>
           <Button variant="outline" size="sm">
-            <TrendingUp className="mr-2 h-4 w-4" />
+            <TrendingUp className="w-4 h-4 mr-2" />
             Sort
           </Button>
         </div>
@@ -93,7 +93,7 @@ export function SectorsPage() {
         </CardHeader>
         <CardContent>
           <div className="h-[300px] w-full bg-muted/25 rounded-md flex items-center justify-center text-muted-foreground">
-            <BarChart3 className="mr-2 h-5 w-5" />
+            <BarChart3 className="w-5 h-5 mr-2" />
             Sector growth chart visualization
           </div>
         </CardContent>
