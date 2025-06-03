@@ -18,8 +18,6 @@ import {
   TrendingUp,
   Users,
   Search,
-  Users2,
-  ShieldCheck,
   Share2,
   User2,
 } from "lucide-react";
