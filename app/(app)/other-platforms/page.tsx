@@ -29,10 +29,10 @@ export default function OtherPlatforms() {
   const platforms = [
     {
       id: 1,
-      name: "Innovation Salone Hub",
+      name: "Salone CrowdFunder",
       description:
-        "Central hub for innovation and entrepreneurship in Sierra Leone",
-      url: "https://innovationsalone.com",
+        "A crowdfunding platform supporting startup campaigns in Sierra Leone.",
+      url: "https://salonecrowdfunder.com/",
       category: "Innovation",
       icon: <Lightbulb className="w-6 h-6" />,
       status: "Active",
@@ -40,19 +40,25 @@ export default function OtherPlatforms() {
     },
     {
       id: 2,
-      name: "TechSL Community",
-      description: "Community platform for tech professionals and enthusiasts",
-      url: "https://techsl.community",
+      name: "Awansabi",
+      description:
+        "A community-driven platform for tech enthusiasts and startup founders.",
+      url: "http://awansabi.com/",
       category: "Community",
       icon: <Users className="w-6 h-6" />,
       status: "Active",
-      features: ["Networking", "Events", "Job Board"],
+      features: [
+        "Online Courses",
+        "Empowerment Programs",
+        "Job Certifications",
+      ],
     },
     {
       id: 3,
-      name: "SL Learning Hub",
-      description: "Educational platform for skill development and training",
-      url: "https://learning.innovationsalone.com",
+      name: "Inno SL Digital",
+      description:
+        "The digital learning hub of Innovation SL, offering educational resources and training.",
+      url: "https://innosldigital.com/",
       category: "Education",
       icon: <BookOpen className="w-6 h-6" />,
       status: "Active",
@@ -60,56 +66,40 @@ export default function OtherPlatforms() {
     },
     {
       id: 4,
-      name: "Events SL",
+      name: "Freetown Pitch Night",
       description:
-        "Comprehensive events platform for the Sierra Leone tech ecosystem",
-      url: "https://events.innovationsalone.com",
+        "A platform for pitching business ideas and connecting with investors and mentors.",
+      url: "https://www.freetownpitchnight.com/",
       category: "Events",
       icon: <Calendar className="w-6 h-6" />,
       status: "Active",
-      features: ["Event Listings", "Registration", "Networking"],
+      features: ["Pitching", "Social Engagement", "Networking"],
     },
     {
       id: 5,
-      name: "SL Forum",
-      description: "Discussion forum for entrepreneurs and innovators",
-      url: "https://forum.innovationsalone.com",
+      name: "Freetown Innovation Week",
+      description:
+        "An annual event that inspires and empowers innovators across all sectors.",
+      url: "https://freetowninnovationweek.com/",
       category: "Community",
       icon: <MessageSquare className="w-6 h-6" />,
       status: "Active",
-      features: ["Discussions", "Q&A", "Knowledge Sharing"],
+      features: ["Panel Discussions", "Workshops", "Knowledge Sharing"],
     },
     {
       id: 6,
-      name: "Jobs SL",
+      name: "Innosl",
       description:
-        "Job board connecting talent with opportunities in Sierra Leone",
-      url: "https://jobs.innovationsalone.com",
+        "The official platform of Innovation SL for job opportunities and career development.",
+      url: "https://www.innosl.com/",
       category: "Jobs",
       icon: <Briefcase className="w-6 h-6" />,
       status: "Active",
-      features: ["Job Listings", "Talent Pool", "Career Resources"],
-    },
-    {
-      id: 8,
-      name: "Inno Digital",
-      description:
-        "Latest news and insights from Sierra Leone's innovation ecosystem",
-      url: "https://news.innovationsalone.com",
-      category: "News",
-      icon: <Newspaper className="w-6 h-6" />,
-      status: "Active",
-      features: ["News Articles", "Industry Reports", "Interviews"],
-    },
-    {
-      id: 9,
-      name: "Salone Crowdfunder",
-      description: "Crowdfunding platform for startups and projects",
-      url: "https://crowdfunder.innovationsalone.com",
-      category: "Events",
-      icon: <Video className="w-6 h-6" />,
-      status: "Active",
-      features: ["Live Webinars", "Recordings", "Interactive Sessions"],
+      features: [
+        "Innovation SL Info",
+        "Official Web Platform",
+        "Career Resources",
+      ],
     },
   ];
 
@@ -160,16 +150,18 @@ export default function OtherPlatforms() {
           {platforms.map((platform) => (
             <Card
               key={platform.id}
-              className="transition-shadow hover:shadow-lg"
+              className="transition-shadow border hover:shadow-xl rounded-xl"
             >
-              <CardHeader>
+              <CardHeader className="pb-2">
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-start space-x-4">
                     <div className="p-2 text-blue-600 bg-blue-100 rounded-lg">
                       {platform.icon}
                     </div>
                     <div>
-                      <CardTitle className="text-lg">{platform.name}</CardTitle>
+                      <CardTitle className="text-lg font-semibold text-gray-800">
+                        {platform.name}
+                      </CardTitle>
                       <div className="flex items-center mt-1 space-x-2">
                         <Badge
                           variant={
@@ -185,22 +177,23 @@ export default function OtherPlatforms() {
                     </div>
                   </div>
                 </div>
-                <CardDescription className="mt-3">
+                <CardDescription className="mt-3 text-sm text-gray-600">
                   {platform.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+
+              <CardContent className="pt-0">
                 <div className="space-y-4">
                   <div>
-                    <h4 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <h4 className="mb-2 text-sm font-medium text-gray-800">
                       Key Features:
                     </h4>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-2">
                       {platform.features.map((feature, index) => (
                         <Badge
                           key={index}
                           variant="secondary"
-                          className="text-xs"
+                          className="px-2 py-1 text-xs"
                         >
                           {feature}
                         </Badge>
@@ -208,32 +201,32 @@ export default function OtherPlatforms() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Globe className="w-4 h-4 mr-1" />
-                      <span className="truncate">{platform.url}</span>
+                  <div className="flex items-center justify-between pt-3 border-t">
+                    <div className="flex items-center overflow-hidden text-sm text-gray-500">
+                      <Globe className="w-4 h-4 mr-1 shrink-0" />
+                      <span className="truncate max-w-[160px]">
+                        {platform.url}
+                      </span>
                     </div>
-                    <Button
-                      size="sm"
-                      disabled={platform.status === "Coming Soon"}
-                      asChild={platform.status === "Active"}
-                    >
-                      {platform.status === "Active" ? (
+
+                    {platform.status === "Active" ? (
+                      <Button size="sm" asChild>
                         <a
                           href={platform.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          aria-label={`Visit ${platform.name}`}
                         >
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Visit
                         </a>
-                      ) : (
-                        <>
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Coming Soon
-                        </>
-                      )}
-                    </Button>
+                      </Button>
+                    ) : (
+                      <Button size="sm" disabled>
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Coming Soon
+                      </Button>
+                    )}
                   </div>
                 </div>
               </CardContent>
