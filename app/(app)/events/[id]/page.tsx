@@ -232,10 +232,10 @@ export default function EventDetailPage() {
             <div className="lg:col-span-2">
               <div className="mb-6">
                 <Badge className="mb-3">{event.category}</Badge>
-                <h1 className="mb-4 text-4xl font-bold text-gray-900">
+                <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-slate-200">
                   {event.title}
                 </h1>
-                <p className="text-xl leading-relaxed text-gray-600">
+                <p className="text-xl leading-relaxed text-gray-600 dark:text-slate-400">
                   {event.longDescription}
                 </p>
               </div>
@@ -277,24 +277,24 @@ export default function EventDetailPage() {
                   </div>
 
                   <div className="space-y-3">
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                       <Calendar className="w-4 h-4 mr-3" />
                       {formatDate(event.date)}
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                       <Clock className="w-4 h-4 mr-3" />
                       {event.time} - {event.endTime}
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                       <MapPin className="w-4 h-4 mr-3" />
                       <div>
                         <div>{event.location}</div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-gray-500 dark:text-slate-400">
                           {event.address}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                       <Users className="w-4 h-4 mr-3" />
                       Up to {event.maxAttendees} attendees
                     </div>
@@ -310,17 +310,25 @@ export default function EventDetailPage() {
                       </Button>
                     </Link>
                   ) : isUpcoming ? (
-                    <Button disabled className="w-full" size="lg">
+                    <Button
+                      disabled
+                      className="w-full dark:text-black"
+                      size="lg"
+                    >
                       Registration Closed
                     </Button>
                   ) : (
-                    <Button disabled className="w-full" size="lg">
+                    <Button
+                      disabled
+                      className="w-full dark:text-black"
+                      size="lg"
+                    >
                       Event Completed
                     </Button>
                   )}
 
                   {isUpcoming && (
-                    <p className="text-xs text-center text-gray-500">
+                    <p className="text-xs text-center text-gray-500 dark:text-slate-400">
                       Registration closes on{" "}
                       {formatDate(event.registrationDeadline)}
                     </p>
@@ -346,15 +354,15 @@ export default function EventDetailPage() {
                     <div className="flex-1">
                       <h4 className="font-semibold">{event.organizer.name}</h4>
                       <div className="mt-2 space-y-1">
-                        <div className="flex items-center text-sm text-gray-600">
+                        <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                           <Mail className="w-3 h-3 mr-2" />
                           {event.organizer.email}
                         </div>
-                        <div className="flex items-center text-sm text-gray-600">
+                        <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                           <Phone className="w-3 h-3 mr-2" />
                           {event.organizer.phone}
                         </div>
-                        <div className="flex items-center text-sm text-gray-600">
+                        <div className="flex items-center text-sm text-gray-600 dark:text-slate-400">
                           <Globe className="w-3 h-3 mr-2" />
                           <a
                             href={event.organizer.website}
@@ -390,7 +398,7 @@ export default function EventDetailPage() {
                   <CardTitle>About This Event</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="leading-relaxed text-gray-600">
+                  <p className="leading-relaxed text-gray-600 dark:text-slate-400">
                     {event.description}
                   </p>
                 </CardContent>
@@ -436,7 +444,9 @@ export default function EventDetailPage() {
                     {event.requirements.map((req, index) => (
                       <li key={index} className="flex items-center space-x-2">
                         <CheckCircle className="flex-shrink-0 w-4 h-4 text-green-500" />
-                        <span className="text-gray-600">{req}</span>
+                        <span className="text-gray-600 dark:text-slate-400">
+                          {req}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -475,11 +485,11 @@ export default function EventDetailPage() {
                 <div className="space-y-6">
                   {event.agenda.map((item, index) => (
                     <div key={index} className="flex space-x-4">
-                      <div className="flex-shrink-0 w-20 text-sm font-medium text-gray-900">
+                      <div className="flex-shrink-0 w-20 text-sm font-medium text-gray-900 dark:text-slate-400">
                         {item.time}
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900">
+                        <h4 className="font-semibold text-gray-900 dark:text-slate-400">
                           {item.title}
                         </h4>
                         <p className="mt-1 text-sm text-gray-600">
@@ -511,7 +521,9 @@ export default function EventDetailPage() {
                       <p className="mb-3 text-sm text-gray-600">
                         {speaker.title}
                       </p>
-                      <p className="text-sm text-gray-700">{speaker.bio}</p>
+                      <p className="text-sm text-gray-700 dark:text-slate-400">
+                        {speaker.bio}
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
