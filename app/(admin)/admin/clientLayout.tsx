@@ -93,7 +93,10 @@ export default function ClientLayout({
                 className="object-contain w-full h-full rounded-md"
               />
             </div>
-            <span className="text-xl font-bold">StartUp-SL</span>
+            {/* <span className="text-xl font-bold">StartUp-SL</span> */}
+            <span className="text-sm font-bold sm:text-base md:text-lg lg:text-xl">
+              StartUp-SL
+            </span>
           </Link>
 
           <div className="justify-center flex-1 hidden md:flex">
@@ -142,7 +145,7 @@ export default function ClientLayout({
                     </DropdownMenuItem>
                     <DropdownMenuItem className="mt-4 ">
                       <SignOutButton>
-                        <Button className=" text-xs">Logout</Button>
+                        <Button className="text-xs ">Logout</Button>
                       </SignOutButton>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
