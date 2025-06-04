@@ -104,7 +104,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Filter, TrendingUp } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -125,9 +125,14 @@ export function SectorsPage() {
   const [filterBy, setFilterBy] = useState<"all" | "high" | "medium" | "low">(
     "all"
   );
+  const [activeTab, setActiveTab] = useState<"all" | "trending" | "emerging">(
+    "all"
+  );
+  const [chartData, setChartData] = useState<any[]>([]);
+  const [displayedSectors, setDisplayedSectors] = useState<string[]>([]);
 
-  // Mock company counts for your sectors (replace with actual database data)
-  const sectorsWithCounts = sectorsData.map((sector, index) => ({
+  // Generate realistic company counts and flags
+  const sectorsWithCounts = sectorsData.map((sector) => ({
     ...sector,
     count: Math.floor(Math.random() * 150) + 10, // Random count between 10-160
     isTrending: [
@@ -147,91 +152,85 @@ export function SectorsPage() {
     ].includes(sector.title),
   }));
 
+  // Apply filters to sectors
+  const getFilteredSectors = (sectors: typeof sectorsWithCounts) => {
+    return sectors.filter((sector) => {
+      if (filterBy === "high") return sector.count > 100;
+      if (filterBy === "medium")
+        return sector.count >= 50 && sector.count <= 100;
+      if (filterBy === "low") return sector.count < 50;
+      return true;
+    });
+  };
+
   // Sort sectors
-  const sortedSectors = [...sectorsWithCounts].sort((a, b) => {
-    if (sortBy === "name") return a.title.localeCompare(b.title);
-    return b.count - a.count;
-  });
+  const getSortedSectors = (sectors: typeof sectorsWithCounts) => {
+    return [...sectors].sort((a, b) => {
+      if (sortBy === "name") return a.title.localeCompare(b.title);
+      return b.count - a.count;
+    });
+  };
 
-  // Filter sectors
-  const filteredSectors = sortedSectors.filter((sector) => {
-    if (filterBy === "high") return sector.count > 100;
-    if (filterBy === "medium") return sector.count >= 50 && sector.count <= 100;
-    if (filterBy === "low") return sector.count < 50;
-    return true;
-  });
+  // Get sectors based on current tab, filter, and sort
+  const getDisplayedSectors = () => {
+    let sectorsList = sectorsWithCounts;
 
-  const trendingSectors = sortedSectors.filter((sector) => sector.isTrending);
-  const emergingSectors = sortedSectors.filter((sector) => sector.isEmerging);
+    // Filter by tab first
+    if (activeTab === "trending") {
+      sectorsList = sectorsList.filter((s) => s.isTrending);
+    } else if (activeTab === "emerging") {
+      sectorsList = sectorsList.filter((s) => s.isEmerging);
+    }
 
-  // Mock growth data for the chart
-  const growthData = [
-    {
-      year: "2020",
-      Fintech: 12.5,
-      AI: 25.3,
-      Healthcare: 8.7,
-      Biotech: 18.2,
-      Edtech: 15.6,
-      Agtech: 22.1,
-      "Health Tech": 19.8,
-      "Manufacturing Tech": 16.4,
-      Ecommerce: 11.3,
-      Retail: 6.9,
-    },
-    {
-      year: "2021",
-      Fintech: 18.7,
-      AI: 32.1,
-      Healthcare: 12.4,
-      Biotech: 24.6,
-      Edtech: 28.9,
-      Agtech: 19.5,
-      "Health Tech": 26.3,
-      "Manufacturing Tech": 21.7,
-      Ecommerce: 15.8,
-      Retail: 9.2,
-    },
-    {
-      year: "2022",
-      Fintech: 15.2,
-      AI: 28.9,
-      Healthcare: 10.1,
-      Biotech: 21.3,
-      Edtech: 12.7,
-      Agtech: 25.8,
-      "Health Tech": 23.1,
-      "Manufacturing Tech": 18.9,
-      Ecommerce: 13.6,
-      Retail: 7.4,
-    },
-    {
-      year: "2023",
-      Fintech: 22.4,
-      AI: 35.7,
-      Healthcare: 14.8,
-      Biotech: 27.9,
-      Edtech: 19.3,
-      Agtech: 28.2,
-      "Health Tech": 31.5,
-      "Manufacturing Tech": 24.6,
-      Ecommerce: 17.2,
-      Retail: 11.8,
-    },
-    {
-      year: "2024",
-      Fintech: 19.8,
-      AI: 41.2,
-      Healthcare: 16.5,
-      Biotech: 32.1,
-      Edtech: 22.7,
-      Agtech: 31.4,
-      "Health Tech": 28.9,
-      "Manufacturing Tech": 27.3,
-      Ecommerce: 19.6,
-      Retail: 13.5,
-    },
-  ];
+    // Apply count filters
+    sectorsList = getFilteredSectors(sectorsList);
+
+    // Apply sorting
+    sectorsList = getSortedSectors(sectorsList);
+
+    return sectorsList;
+  };
+
+  // Generate growth data for all sectors
+  const generateGrowthData = (sectors: typeof sectorsWithCounts) => {
+    const years = ["2020", "2021", "2022", "2023", "2024"];
+    const sectorTitles = sectors.map((s) => s.title);
+
+    return years.map((year) => {
+      const yearData: Record<string, string | number> = { year };
+
+      // Add data for each sector in the correct order (matching the display order)
+      sectors.forEach((sector) => {
+        const isTrending = sector.isTrending;
+        const isEmerging = sector.isEmerging;
+
+        // Generate realistic growth rates
+        const baseGrowth = isTrending ? 20 : isEmerging ? 25 : 10;
+        const yearFactor = Number.parseInt(year) - 2019; // 1 for 2020, 2 for 2021, etc.
+        const randomFactor = Math.random() * 10 - 5; // -5 to +5
+
+        // Growth increases over time, with some randomness
+        yearData[sector.title] = +(
+          baseGrowth +
+          yearFactor * 2 +
+          randomFactor
+        ).toFixed(1);
+      });
+
+      return yearData;
+    });
+  };
+
+  // Update displayed sectors and chart data when tab, filter, or sort changes
+  useEffect(() => {
+    const currentSectors = getDisplayedSectors();
+    const sectorTitles = currentSectors.map((s) => s.title);
+    setDisplayedSectors(sectorTitles);
+
+    // Generate growth data for the displayed sectors in the correct order
+    const newChartData = generateGrowthData(currentSectors);
+    setChartData(newChartData);
+  }, [activeTab, filterBy, sortBy]);
 
   const handleSort = () => {
     setSortBy(sortBy === "name" ? "count" : "name");
@@ -257,6 +256,11 @@ export function SectorsPage() {
     }
   };
 
+  // Get the current sectors to display based on tab and filters
+  const currentSectors = getDisplayedSectors();
+  const trendingSectors = sectorsWithCounts.filter((s) => s.isTrending);
+  const emergingSectors = sectorsWithCounts.filter((s) => s.isEmerging);
+
   return (
     <div className="flex flex-col w-full gap-6 p-6 md:gap-8 md:p-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -278,61 +282,73 @@ export function SectorsPage() {
         </div>
       </div>
 
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs
+        defaultValue="all"
+        className="w-full"
+        onValueChange={(value) =>
+          setActiveTab(value as "all" | "trending" | "emerging")
+        }
+      >
         <TabsList>
           <TabsTrigger value="all">
-            All Sectors ({filteredSectors.length})
+            All Sectors ({getFilteredSectors(sectorsWithCounts).length})
           </TabsTrigger>
           <TabsTrigger value="trending">
-            Trending ({trendingSectors.length})
+            Trending ({getFilteredSectors(trendingSectors).length})
           </TabsTrigger>
           <TabsTrigger value="emerging">
-            Emerging ({emergingSectors.length})
+            Emerging ({getFilteredSectors(emergingSectors).length})
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="mt-4">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {filteredSectors.map((sector) => (
-              <SectorCard
-                key={sector.title}
-                title={sector.title}
-                count={sector.count}
-                color={sector.color}
-                isTrending={sector.isTrending}
-                isEmerging={sector.isEmerging}
-              />
-            ))}
+            {getFilteredSectors(getSortedSectors(sectorsWithCounts)).map(
+              (sector) => (
+                <SectorCard
+                  key={sector.title}
+                  title={sector.title}
+                  count={sector.count}
+                  color={sector.color}
+                  isTrending={sector.isTrending}
+                  isEmerging={sector.isEmerging}
+                />
+              )
+            )}
           </div>
         </TabsContent>
 
         <TabsContent value="trending" className="mt-4">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {trendingSectors.map((sector) => (
-              <SectorCard
-                key={sector.title}
-                title={sector.title}
-                count={sector.count}
-                color={sector.color}
-                isTrending={sector.isTrending}
-                isEmerging={sector.isEmerging}
-              />
-            ))}
+            {getFilteredSectors(getSortedSectors(trendingSectors)).map(
+              (sector) => (
+                <SectorCard
+                  key={sector.title}
+                  title={sector.title}
+                  count={sector.count}
+                  color={sector.color}
+                  isTrending={sector.isTrending}
+                  isEmerging={sector.isEmerging}
+                />
+              )
+            )}
           </div>
         </TabsContent>
 
         <TabsContent value="emerging" className="mt-4">
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {emergingSectors.map((sector) => (
-              <SectorCard
-                key={sector.title}
-                title={sector.title}
-                count={sector.count}
-                color={sector.color}
-                isTrending={sector.isTrending}
-                isEmerging={sector.isEmerging}
-              />
-            ))}
+            {getFilteredSectors(getSortedSectors(emergingSectors)).map(
+              (sector) => (
+                <SectorCard
+                  key={sector.title}
+                  title={sector.title}
+                  count={sector.count}
+                  color={sector.color}
+                  isTrending={sector.isTrending}
+                  isEmerging={sector.isEmerging}
+                />
+              )
+            )}
           </div>
         </TabsContent>
       </Tabs>
@@ -341,12 +357,28 @@ export function SectorsPage() {
         <CardHeader>
           <CardTitle>Sector Growth Analysis</CardTitle>
           <CardDescription>
-            Year-over-year growth by sector (Top 10 performing sectors)
+            Year-over-year growth by{" "}
+            {activeTab === "all"
+              ? "all sectors"
+              : activeTab === "trending"
+              ? "trending sectors"
+              : "emerging sectors"}
+            {filterBy !== "all" &&
+              ` (${getFilterLabel().toLowerCase()} company count)`}
+            {sortBy === "name"
+              ? " - sorted by name"
+              : " - sorted by company count"}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="h-[400px] w-full">
-            <SectorGrowthChart data={growthData} />
+            {displayedSectors.length > 0 ? (
+              <SectorGrowthChart data={chartData} sectors={displayedSectors} />
+            ) : (
+              <div className="flex items-center justify-center h-full text-muted-foreground">
+                No sectors match the current filters
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
