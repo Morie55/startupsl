@@ -102,7 +102,7 @@ export function HomePage() {
         <h2 className="mb-4 text-2xl font-bold tracking-tight">
           Ecosystem Overview
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 ">
           <StatCard
             title="Companies"
             value="934"
