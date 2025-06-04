@@ -156,15 +156,15 @@ export default function EventsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-800">
       {/* Header Section */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b dark:bg-slate-800">
         <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-gray-900">
+            <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-slate-100">
               Startup Events
             </h1>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-slate-300">
               Discover networking opportunities, workshops, and competitions
               that will help grow your startup in Sierra Leone's thriving
               ecosystem.

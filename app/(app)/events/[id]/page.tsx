@@ -167,7 +167,7 @@ export default function EventDetailPage() {
 
   if (!event) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-slate-800">
         <div className="text-center">
           <h1 className="mb-2 text-2xl font-bold text-gray-900">
             Event Not Found
@@ -197,9 +197,9 @@ export default function EventDetailPage() {
   const registrationOpen = new Date(event.registrationDeadline) > new Date();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-800">
       {/* Header */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b dark:bg-slate-800">
         <div className="max-w-6xl px-4 py-6 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 mb-6">
             <Link href="/events">
@@ -227,7 +227,7 @@ export default function EventDetailPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 ">
             {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="mb-6">
