@@ -147,7 +147,7 @@ export default function OtherPlatforms() {
                       {platform.icon}
                     </div>
                     <div>
-                      <CardTitle className="text-lg font-semibold text-gray-800">
+                      <CardTitle className="text-lg font-semibold text-gray-800 dark:text-slate-200">
                         {platform.name}
                       </CardTitle>
                       <div className="flex items-center mt-1 space-x-2">
@@ -165,7 +165,7 @@ export default function OtherPlatforms() {
                     </div>
                   </div>
                 </div>
-                <CardDescription className="mt-3 text-sm text-gray-600">
+                <CardDescription className="mt-3 text-sm text-gray-600 dark:text-slate-200">
                   {platform.description}
                 </CardDescription>
               </CardHeader>
@@ -173,7 +173,7 @@ export default function OtherPlatforms() {
               <CardContent className="pt-0">
                 <div className="space-y-4">
                   <div>
-                    <h4 className="mb-2 text-sm font-medium text-gray-800">
+                    <h4 className="mb-2 text-sm font-medium text-gray-800 dark:text-slate-200">
                       Key Features:
                     </h4>
                     <div className="flex flex-wrap gap-2">
