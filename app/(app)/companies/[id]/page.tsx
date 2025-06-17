@@ -7,7 +7,6 @@ export default async function CompanyDetail({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  // Find company by ID from the params
 
   const company = await getCompanyByIdAction(id);
 
